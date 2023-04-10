@@ -47,10 +47,17 @@ public class Main {
         String outputFilename = scanner.nextLine();
         try {
             File outputFile = new File(outputFilename);
+            int choice = 0;
             if (!outputFile.exists()) {
                 outputFile.createNewFile();
+            } else {
+                while (choice != 1 && choice != 2) {
+                    System.out.println("Файл вже існує.   Перезаписати (1)   Додати (2):");
+                    choice = scanner.nextInt();
+                    scanner.nextLine();
+                }
             }
-            PrintWriter writer = new PrintWriter(outputFile);
+            PrintWriter writer = new PrintWriter(new FileWriter(outputFile, choice != 1 ));
             writer.println("Сума найбільших " + count + " чисел: " + sum);
             writer.println("Числа, з яких було обраховано суму:");
             for (int i = count - 1; i >= 0; i--) {
@@ -66,11 +73,18 @@ public class Main {
         System.out.print("Введіть назву вихідного файлу для запису відсортованих чисел: ");
         outputFilename = scanner.nextLine();
         try {
+            int choice = 0;
             File outputFile = new File(outputFilename);
             if (!outputFile.exists()) {
                 outputFile.createNewFile();
+            } else {
+                while (choice != 1 && choice != 2) {
+                    System.out.println("Файл вже існує.   Перезаписати (1)   Додати (2):");
+                    choice = scanner.nextInt();
+                    scanner.nextLine();
+                }
             }
-            PrintWriter writer = new PrintWriter(outputFile);
+            PrintWriter writer = new PrintWriter(new FileWriter(outputFile, choice != 1 ));
             for (Double number : numbers) {
                 writer.println(number);
             }
@@ -92,7 +106,19 @@ public class Main {
         try {
             File inputFile = new File(inputFilename);
             Scanner fileScanner = new Scanner(inputFile);
-            PrintWriter writer = new PrintWriter(outputFilename);
+
+            int choice = 0;
+            File outputFile = new File(outputFilename);
+            if (!outputFile.exists()) {
+                outputFile.createNewFile();
+            } else {
+                while (choice != 1 && choice != 2) {
+                    System.out.println("Файл вже існує.   Перезаписати (1)   Додати (2):");
+                    choice = scanner.nextInt();
+                    scanner.nextLine();
+                }
+            }
+            PrintWriter writer = new PrintWriter(new FileWriter(outputFile, choice != 1 ));
 
             while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine().trim();
